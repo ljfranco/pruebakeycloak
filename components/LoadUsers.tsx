@@ -19,7 +19,7 @@ const LoadUsers: React.FC<LoadUsersProps> = ({ accessToken }) => {
 
         try {
             const response = await fetch(
-                `${process.env.NEXT_PUBLIC_GATEWAY_URL}/users/getall`,
+                `${process.env.NEXT_PUBLIC_GATEWAY_URL}/projects/getall`,
                 {
                     method: "GET",
                     headers: {
