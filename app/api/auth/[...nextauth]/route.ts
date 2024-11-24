@@ -1,5 +1,6 @@
 // app/api/auth/[...nextauth]/route.ts
-import NextAuth, { AuthOptions, TokenSet } from "next-auth";
+import {NextAuthOptions, TokenSet } from "next-auth";
+import NextAuth from "next-auth/next";
 import KeycloakProvider from "next-auth/providers/keycloak"
 
 function requestRefreshOfAccessToken(token: JWT) {
@@ -16,7 +17,7 @@ function requestRefreshOfAccessToken(token: JWT) {
     });
 }
 
-export const authOptions: AuthOptions = {
+export const authOptions: NextAuthOptions = {
     providers: [
         KeycloakProvider({
             clientId: process.env.KEYCLOAK_CLIENT_ID,
