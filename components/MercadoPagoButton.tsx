@@ -59,7 +59,7 @@ const MercadoPagoButton: React.FC = () => {
         disabled={loading}
         style={{ padding: '10px 20px', fontSize: '16px' }}
       >
-        {loading ? 'Cargando...' : 'Pagar con MercadoPago'}
+        {loading ? 'Cargando...' : 'Pagar con Mercado Pago'}
       </button>
       <div id="checkout-button"></div> {/* Aquí se renderiza el botón de MercadoPago */}
     </div>
