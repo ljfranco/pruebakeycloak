@@ -9,8 +9,11 @@ declare global {
         MercadoPago: any;
     }
 }
+interface MercadoPagoButtonProps {
+    accessToken: string | null;
+}
 
-const MercadoPagoButton: React.FC = () => {
+const MercadoPagoButton: React.FC <MercadoPagoButtonProps> = ({ accessToken }) => {
     const [loading, setLoading] = useState<boolean>(false);
 
     const handleClick = async () => {
@@ -21,6 +24,7 @@ const MercadoPagoButton: React.FC = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    Authorization: `Bearer ${accessToken}`,
                 },
                 body: JSON.stringify([{
                     "id": "1",
