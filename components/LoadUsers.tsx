@@ -74,7 +74,7 @@ const LoadUsers: React.FC<LoadUsersProps> = ({ accessToken }) => {
             )}
             <div>
                 <h1>Realiza tu pago con MercadoPago</h1>
-                <MercadoPagoButton />
+                {accessToken && <MercadoPagoButton accessToken={accessToken} />}
             </div>
         </div>
     );

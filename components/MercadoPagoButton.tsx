@@ -1,20 +1,19 @@
-// src/components/MercadoPagoButton.tsx
-
 import React, { useState } from 'react';
 
 // Si MercadoPago no tiene tipos disponibles, puedes declarar el tipo manualmente.
-// Tipo básico para el SDK de MercadoPago (si no tienes los tipos adecuados)
 declare global {
     interface Window {
         MercadoPago: any;
     }
 }
+
 interface MercadoPagoButtonProps {
-    accessToken: string | null;
+    accessToken: string;
 }
 
-const MercadoPagoButton: React.FC <MercadoPagoButtonProps> = ({ accessToken }) => {
+const MercadoPagoButton: React.FC<MercadoPagoButtonProps> = ({ accessToken }) => {
     const [loading, setLoading] = useState<boolean>(false);
+    const [preferenceId, setPreferenceId] = useState<string | null>(null);
 
     const handleClick = async () => {
         try {
@@ -42,22 +41,13 @@ const MercadoPagoButton: React.FC <MercadoPagoButtonProps> = ({ accessToken }) =
             }
 
             const preference = await response.json();
+            console.log('Preferencia de pago:', preference);
 
-            // Crear una instancia de MercadoPago con tu public key
-            const mp = new window.MercadoPago(process.env.MERCADOPAGO_, {
-                locale: 'es-UY', // Cambia la localización según el país
-            });
+            setPreferenceId(preference.id);
 
-            // Crear el checkout de pago con la preferencia obtenida
-            mp.checkout({
-                preference: {
-                    id: preference.id,
-                },
-                render: {
-                    container: '#checkout-button', // Contenedor donde se renderiza el botón
-                    label: 'Pagar ahora', // Etiqueta del botón
-                },
-            });
+            // Redirigir al usuario a la URL de MercadoPago con el pref_id
+            const redirectUrl = `https://www.mercadopago.com.uy/checkout/v1/redirect?pref_id=${preference.id}`;
+            window.location.href = redirectUrl;  // Redirigir al checkout de MercadoPago
         } catch (error) {
             console.error('Error al procesar el pago:', error);
         } finally {
@@ -74,7 +64,6 @@ const MercadoPagoButton: React.FC <MercadoPagoButtonProps> = ({ accessToken }) =
             >
                 {loading ? 'Cargando...' : 'Pagar con Mercado Pago'}
             </button>
-            <div id="checkout-button"></div> {/* Aquí se renderiza el botón de MercadoPago */}
         </div>
     );
 };
