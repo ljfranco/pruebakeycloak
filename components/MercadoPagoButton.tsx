@@ -17,7 +17,7 @@ const MercadoPagoButton: React.FC = () => {
         try {
             setLoading(true);
             // Llamar al backend para obtener la preferencia de pago
-            const response = await fetch(`${process.env.NEXT_PUBLIC_GATEWAY_URL}/mercadopago/createpreference`, {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_GATEWAY_URL}/payments/createpreference`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
