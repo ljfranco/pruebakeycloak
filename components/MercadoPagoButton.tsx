@@ -22,15 +22,15 @@ const MercadoPagoButton: React.FC = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    "id": "Reforestación Barros Blancos",
+                body: JSON.stringify([{
+                    "id": "1",
                     "name": "Reforestación del Parque Nacional Quebrada de los Cuervos",
                     "description": "Iniciativa para plantar 5,000 árboles nativos en el parque.",
                     "imageUrl": "https://7maravillas.uy/wp-content/uploads/2021/01/quebrada-cuervos-foto-uruguay-natural.jpg",
                     "location": "Treinta y Tres, Uruguay",
                     "quantity": 1,
                     "unitPrice": 1000
-                }),
+                }]),
             });
 
             if (!response.ok) {
